@@ -1,6 +1,7 @@
 ﻿using SFML.Window;
 using SFML.Graphics;
 using SFML.System;
+using SFML_Thing.Core;
 
 namespace SFML_Thing;
 
@@ -13,7 +14,10 @@ static class Program
         window.SetFramerateLimit(165);
 
         Color windowColor = new Color(0, 255, 0);
-        
+
+        Game game = new Game();
+        game.Run();
+
         while (window.IsOpen)
         {
             window.DispatchEvents();

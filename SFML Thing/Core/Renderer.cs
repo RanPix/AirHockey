@@ -1,4 +1,4 @@
-﻿namespace SFML_Thing;
+﻿namespace SFML_Thing.Core;
 
 public class Renderer
 {
