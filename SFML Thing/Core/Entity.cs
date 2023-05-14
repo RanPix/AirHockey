@@ -7,7 +7,13 @@ public abstract class Entity
     Shape shape = new CircleShape();
 
 
-    public abstract void Start();
+    public virtual void Start()
+    {
 
-    public abstract void Update();
+    }
+
+    public virtual void Update()
+    {
+
+    }
 }
