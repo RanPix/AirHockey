@@ -1,6 +1,5 @@
 ﻿using SFML.Window;
 using SFML.Graphics;
-using SFML.System;
 using SFML_Thing.Core;
 
 namespace SFML_Thing;
