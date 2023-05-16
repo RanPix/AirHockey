@@ -1,13 +1,14 @@
 ﻿using SFML.Graphics;
 using SFML.System;
-using System.Formats.Asn1;
 
-namespace SFML_Thing.Core;
+namespace PingPong.Core;
 
 public abstract class Entity
 {
     public Tag tag = Tag.None;
     public Shape shape = new CircleShape();
+
+    public Vector2f collider;
 
     private Vector2f _position;
     public Vector2f position

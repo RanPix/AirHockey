@@ -1,8 +1,9 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
+using PingPong.Core;
 
-namespace SFML_Thing.Core;
+namespace PingPong.Assets;
 
 public class Paddle : Entity
 {
@@ -11,15 +12,16 @@ public class Paddle : Entity
 
     private float moveSpeed = 6f;
 
-    
-
     public override void Start()
     {
         base.Start();
 
+        collider = rectSize * 0.5f;
         shape = new RectangleShape(rectSize);
+
         origin = rectSize * 0.5f;
         shape.Origin = origin;
+
         shape.FillColor = Color.Cyan;
 
         //Console.WriteLine("Start");
@@ -34,12 +36,19 @@ public class Paddle : Entity
         //Console.WriteLine("Update");
     }
 
+    public override void OnCollisionEnter(Entity collision)
+    {
+        base.OnCollisionEnter(collision);
+
+        //Console.WriteLine("YES22");
+    }
+
     private void Move()
     {
         Vector2f newPosition = position + ProcessMovementInput() * moveSpeed;
 
         // ЧОГО Я ТАК ТУПЛЮЮЮ
-        position = newPosition.X - origin.X < 0f ? 
+        position = newPosition.X - origin.X < 0f ?
                    new Vector2f(origin.X, position.Y) :
 
                    newPosition.X + origin.X > Renderer.windowX ?

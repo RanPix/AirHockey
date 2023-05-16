@@ -1,7 +1,7 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
 
-namespace SFML_Thing.Core;
+namespace PingPong.Core;
 
 public class Renderer
 {

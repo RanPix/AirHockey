@@ -1,10 +1,12 @@
 ﻿using SFML.System;
+using PingPong.Assets;
 
-namespace SFML_Thing.Core;
+namespace PingPong.Core;
 
 public class Game
 {
     private Renderer renderer = new Renderer();
+    private Physics physics = new Physics();
 
     private List<Entity> hierarchy = new List<Entity>()
     {
@@ -22,6 +24,7 @@ public class Game
         while (true)
         {
             renderer.Render(hierarchy.ToArray());
+            physics.Update(hierarchy.ToArray());
             Update();
         }
     }

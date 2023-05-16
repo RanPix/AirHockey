@@ -1,26 +1,29 @@
 ﻿using SFML.Graphics;
 using SFML.System;
+using PingPong.Core;
 
-namespace SFML_Thing.Core;
+namespace PingPong.Assets;
 
 public class Ball : Entity
 {
     private float radius = 15f;
 
-    private float moveSpeed = 3f;
+    private float moveSpeed = 5f;
     private Vector2f velocity;
 
     private int bounces;
+
+    private float collisionIgnoreTime;
 
     public override void Start()
     {
         base.Start();
 
+        collider = new Vector2f(radius, radius);
         shape = new CircleShape(radius, 30);
         shape.Origin = new Vector2f(radius, radius);
-        velocity = new Vector2f(moveSpeed, moveSpeed);
 
-        //Console.WriteLine("Start");
+        velocity = new Vector2f(moveSpeed, moveSpeed);
     }
 
     public override void Update()
@@ -29,15 +32,20 @@ public class Ball : Entity
 
         Bounce();
         Move();
-        //Console.WriteLine(bounces);
     }
 
     public override void OnCollisionEnter(Entity collision)
     {
         base.OnCollisionEnter(collision);
 
+
+        velocity.Y = -velocity.Y;
+        velocity.X = Rand.Next(-moveSpeed - 5, moveSpeed + 5);
+        bounces++;
+
         if (collision.tag == Tag.Platform)
         {
+            Console.WriteLine("YES" + bounces);
 
         }
     }

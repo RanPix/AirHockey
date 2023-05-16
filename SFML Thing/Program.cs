@@ -1,6 +1,6 @@
-﻿using SFML_Thing.Core;
+﻿using PingPong.Core;
 
-namespace SFML_Thing;
+namespace PingPong;
 
 static class Program
 {

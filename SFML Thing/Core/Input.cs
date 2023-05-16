@@ -1,7 +1,7 @@
 ﻿using SFML.System;
 using SFML.Window;
 
-namespace SFML_Thing.Core;
+namespace PingPong.Core;
 
 public static class Input
 {

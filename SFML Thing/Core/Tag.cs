@@ -1,4 +1,4 @@
-﻿namespace SFML_Thing.Core;
+﻿namespace PingPong.Core;
 
 public enum Tag
 {
