@@ -11,11 +11,6 @@ public class Ball : Entity
     private float moveSpeed = 500f;
     private Vector2f velocity;
 
-    private int bounces;
-
-    private float collisionIgnoreTime = 0.1f;
-    private float collisionIgnoreTimer;
-
     public override void Start()
     {
         base.Start();
@@ -31,8 +26,6 @@ public class Ball : Entity
     {
         base.Update();
 
-        collisionIgnoreTimer += Time.deltaTime;
-
         Bounce();
         Move();
     }
@@ -46,7 +39,6 @@ public class Ball : Entity
             velocity.Y = -velocity.Y;
             velocity.X = Rand.Next(-moveSpeed - 5, moveSpeed + 5);
 
-            bounces++;
             moveSpeed += 5f;
         }
     }
@@ -56,12 +48,10 @@ public class Ball : Entity
         if (position.X - radius < 0f && velocity.X < 0f)
         {
             velocity.X = -velocity.X;
-            bounces++;
         }
         if (position.X + radius > Renderer.windowX && velocity.X > 0f)
         {
             velocity.X = -velocity.X;
-            bounces++;
         }
 
         if (position.Y - radius < 0f)
