@@ -54,22 +54,20 @@ public class Ball : Entity
             velocity.X = -velocity.X;
         }
 
-        if (position.Y - radius < 0f)
+        if (position.Y - radius < 0f && position.Y + radius > Renderer.windowY)
         {
-            position = new Vector2f(400f, 600f);
-
-            velocity.X = Rand.Next(-moveSpeed - 5, moveSpeed + 5);
-            velocity.Y = -velocity.Y;
-        }
-        if (position.Y + radius > Renderer.windowY)
-        {
-            position = new Vector2f(400f, 600f);
-
-            velocity.X = Rand.Next(-moveSpeed - 5, moveSpeed + 5);
-            velocity.Y = -velocity.Y;
+            Respawn();
         }
     }
 
     private void Move()
         => position += velocity * Time.deltaTime;
+
+    private void Respawn()
+    {
+        position = new Vector2f(400f, 600f);
+
+        velocity.X = Rand.Next(-moveSpeed - 5, moveSpeed + 5);
+        velocity.Y = -velocity.Y;
+    }
 }
