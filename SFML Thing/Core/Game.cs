@@ -15,12 +15,14 @@ public class Game
         new Ball() { position = new Vector2f(400f, 600f), tag = Tag.Ball },
         new Paddle() { position = new Vector2f(400f, 50f), tag = Tag.Platform },
         new Paddle() { position = new Vector2f(400f, 1170f), tag = Tag.Platform },
+
+        new Score(),
     };
 
     public void Run()
     {
         Time.Start();
-        renderer.Init();
+        renderer.Start();
         Start();
 
         while (true)

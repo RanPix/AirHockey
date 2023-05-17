@@ -11,7 +11,7 @@ public class Renderer
     public static uint windowX = 800;
     public static uint windowY = 1200;
 
-    public void Init()
+    public void Start()
     {
         window = new RenderWindow(new VideoMode(windowX, windowY), "Air Hockay");
 
