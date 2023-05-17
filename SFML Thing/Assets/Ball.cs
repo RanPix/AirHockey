@@ -54,7 +54,7 @@ public class Ball : Entity
             velocity.X = -velocity.X;
         }
 
-        if (position.Y - radius < 0f && position.Y + radius > Renderer.windowY)
+        if (position.Y - radius < 0f || position.Y + radius > Renderer.windowY)
         {
             Respawn();
         }
