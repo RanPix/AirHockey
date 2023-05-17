@@ -8,12 +8,13 @@ public class Ball : Entity
 {
     private float radius = 15f;
 
-    private float moveSpeed = 5f;
+    private float moveSpeed = 500f;
     private Vector2f velocity;
 
     private int bounces;
 
-    private float collisionIgnoreTime;
+    private float collisionIgnoreTime = 0.1f;
+    private float collisionIgnoreTimer;
 
     public override void Start()
     {
@@ -30,6 +31,8 @@ public class Ball : Entity
     {
         base.Update();
 
+        collisionIgnoreTimer += Time.deltaTime;
+
         Bounce();
         Move();
     }
@@ -38,33 +41,45 @@ public class Ball : Entity
     {
         base.OnCollisionEnter(collision);
 
-
-        velocity.Y = -velocity.Y;
-        velocity.X = Rand.Next(-moveSpeed - 5, moveSpeed + 5);
-        bounces++;
-
         if (collision.tag == Tag.Platform)
         {
-            Console.WriteLine("YES" + bounces);
+            velocity.Y = -velocity.Y;
+            velocity.X = Rand.Next(-moveSpeed - 5, moveSpeed + 5);
 
+            bounces++;
+            moveSpeed += 5f;
         }
     }
 
     private void Bounce()
     {
-        if (position.X - radius < 0f || position.X + radius > Renderer.windowX)
+        if (position.X - radius < 0f && velocity.X < 0f)
+        {
+            velocity.X = -velocity.X;
+            bounces++;
+        }
+        if (position.X + radius > Renderer.windowX && velocity.X > 0f)
         {
             velocity.X = -velocity.X;
             bounces++;
         }
 
-        if (position.Y - radius < 0f || position.Y + radius > Renderer.windowY)
+        if (position.Y - radius < 0f)
         {
+            position = new Vector2f(400f, 600f);
+
+            velocity.X = Rand.Next(-moveSpeed - 5, moveSpeed + 5);
             velocity.Y = -velocity.Y;
-            bounces++;
+        }
+        if (position.Y + radius > Renderer.windowY)
+        {
+            position = new Vector2f(400f, 600f);
+
+            velocity.X = Rand.Next(-moveSpeed - 5, moveSpeed + 5);
+            velocity.Y = -velocity.Y;
         }
     }
 
     private void Move()
-        => position += velocity;
+        => position += velocity * Time.deltaTime;
 }

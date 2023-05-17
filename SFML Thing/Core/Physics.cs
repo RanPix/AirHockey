@@ -16,7 +16,6 @@ public class Physics
                 if (CheckCollision(objects[i].collider, objects[i].position, objects[j].collider, objects[j].position))
                 {
                     objects[i].OnCollisionEnter(objects[j]);
-                    objects[j].OnCollisionEnter(objects[i]);
                 }
             }
         }

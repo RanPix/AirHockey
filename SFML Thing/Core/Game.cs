@@ -1,4 +1,6 @@
-﻿using SFML.System;
+﻿global using Time = PingPong.Core.Time;
+
+using SFML.System;
 using PingPong.Assets;
 
 namespace PingPong.Core;
@@ -10,19 +12,20 @@ public class Game
 
     private List<Entity> hierarchy = new List<Entity>()
     {
-        new Ball() { position = new Vector2f(400f, 300f), tag = Tag.Ball },
+        new Ball() { position = new Vector2f(400f, 600f), tag = Tag.Ball },
         new Paddle() { position = new Vector2f(400f, 50f), tag = Tag.Platform },
         new Paddle() { position = new Vector2f(400f, 1170f), tag = Tag.Platform },
     };
 
     public void Run()
     {
+        Time.Start();
         renderer.Init();
-
         Start();
 
         while (true)
         {
+            Time.Update();
             renderer.Render(hierarchy.ToArray());
             physics.Update(hierarchy.ToArray());
             Update();

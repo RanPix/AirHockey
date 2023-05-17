@@ -10,7 +10,7 @@ public class Paddle : Entity
     private Vector2f rectSize = new Vector2f(100f, 20f);
     private Vector2f origin;
 
-    private float moveSpeed = 6f;
+    private float moveSpeed = 600f;
 
     public override void Start()
     {
@@ -23,8 +23,6 @@ public class Paddle : Entity
         shape.Origin = origin;
 
         shape.FillColor = Color.Cyan;
-
-        //Console.WriteLine("Start");
     }
 
     public override void Update()
@@ -32,20 +30,11 @@ public class Paddle : Entity
         base.Update();
 
         Move();
-
-        //Console.WriteLine("Update");
-    }
-
-    public override void OnCollisionEnter(Entity collision)
-    {
-        base.OnCollisionEnter(collision);
-
-        //Console.WriteLine("YES22");
     }
 
     private void Move()
     {
-        Vector2f newPosition = position + ProcessMovementInput() * moveSpeed;
+        Vector2f newPosition = position + ProcessMovementInput() * moveSpeed * Time.deltaTime;
 
         // ЧОГО Я ТАК ТУПЛЮЮЮ
         position = newPosition.X - origin.X < 0f ?
