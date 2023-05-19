@@ -13,6 +13,8 @@ static class Program
         new Paddle() { position = new Vector2f(400f, 50f), tag = Tag.Paddle, player = Players.Player1, isAI = true },
         new Paddle() { position = new Vector2f(400f, 1170f), tag = Tag.Paddle, player = Players.Player2 },
 
+        new Coin() { tag = Tag.Coin },
+
         new Score() { position = new Vector2f(400f, 600f) },
     };
 

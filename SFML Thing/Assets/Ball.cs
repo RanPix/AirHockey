@@ -10,7 +10,7 @@ public class Ball : Entity
 {
     private float radius = 15f;
 
-    private float moveSpeed = 1000f;
+    private float moveSpeed = 700f;
     private Vector2f velocity;
 
     private Players bouncedPlayer = Players.Player1;
@@ -44,6 +44,9 @@ public class Ball : Entity
 
             BounceOfPaddle(paddle.player);
         }
+
+        if (collision.tag == Tag.Coin)
+            Scored();
     }
 
     private void Bounce()

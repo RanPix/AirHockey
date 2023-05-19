@@ -13,7 +13,7 @@ public class Paddle : Entity
     private Vector2f rectSize = new Vector2f(100f, 20f);
     private Vector2f origin;
 
-    private float moveSpeed = 600f;
+    private float moveSpeed = 550f;
 
     public Entity ball;
 
@@ -43,15 +43,13 @@ public class Paddle : Entity
 
     private void Move(Vector2f input)
     {
-        Vector2f newPosition = new Vector2f();
-
         if (isAI)
         {
             MoveAI();
             return;
         }
 
-        newPosition = position + input * moveSpeed * Time.deltaTime;
+        Vector2f newPosition = position + input * moveSpeed * Time.deltaTime;
 
         if (newPosition.X - origin.X < 0f)
             position = new Vector2f(origin.X, position.Y);
