@@ -3,6 +3,6 @@
 public enum Tag
 {
     None = 0,
-    Platform,
+    Paddle,
     Ball,
 }

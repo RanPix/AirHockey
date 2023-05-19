@@ -1,23 +1,30 @@
 ﻿global using Time = PingPong.Core.Time;
-
-using SFML.System;
-using PingPong.Assets;
+using SFML_Thing.Core;
+using System.ComponentModel;
 
 namespace PingPong.Core;
 
 public class Game
 {
+    public static Game instance;
+
     private Renderer renderer = new Renderer();
     private Physics physics = new Physics();
+    private Input input = new Input();
 
-    private List<Entity> hierarchy = new List<Entity>()
+    private List<Entity> entities = new List<Entity>();
+
+    public Game(List<Entity> entities)
     {
-        new Ball() { position = new Vector2f(400f, 600f), tag = Tag.Ball },
-        new Paddle() { position = new Vector2f(400f, 50f), tag = Tag.Platform },
-        new Paddle() { position = new Vector2f(400f, 1170f), tag = Tag.Platform },
+        if (instance == null)
+            instance = this;
 
-        new Score(),
-    };
+        else
+            throw new Exception("CANNOT HAVE MORE THAN ONE INSTANCE OF THE GAME");
+
+        this.entities = entities;
+    }
+
 
     public void Run()
     {
@@ -28,15 +35,18 @@ public class Game
         while (true)
         {
             Time.Update();
-            renderer.Render(hierarchy.ToArray());
-            physics.Update(hierarchy.ToArray());
+
+            renderer.Render(entities.ToArray());
+            physics.Update(entities.ToArray());
+
+            input.Update();
             Update();
         }
     }
 
     private void Start()
     {
-        foreach (Entity entity in hierarchy)
+        foreach (Entity entity in entities)
         {
             entity.Start();
         }
@@ -44,9 +54,13 @@ public class Game
 
     private void Update()
     {
-        foreach (Entity entity in hierarchy)
+        foreach (Entity entity in entities)
         {
             entity.Update();
         }
     }
+
+
+    public Entity FindByTag(Tag tag)
+        => entities.Find(x => x.tag == tag);
 }

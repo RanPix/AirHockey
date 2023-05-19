@@ -6,7 +6,7 @@ namespace PingPong.Core;
 public abstract class Entity
 {
     public Tag tag = Tag.None;
-    public Shape shape = new CircleShape();
+    public Transformable graphic = new CircleShape(10f, 3);
 
     public Vector2f collider;
 
@@ -17,7 +17,7 @@ public abstract class Entity
         set 
         { 
             _position = value; 
-            shape.Position = value; 
+            graphic.Position = value; 
         }
     }
 

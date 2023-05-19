@@ -13,7 +13,7 @@ public class Renderer
 
     public void Start()
     {
-        window = new RenderWindow(new VideoMode(windowX, windowY), "Air Hockay");
+        window = new RenderWindow(new VideoMode(windowX, windowY), "PingPong");
 
         window.Closed += new EventHandler(OnClose);
         window.Resized += new EventHandler<SizeEventArgs>(OnResize);
@@ -43,17 +43,16 @@ public class Renderer
         window.DispatchEvents();
 
         window.Clear(windowColor);
-
         Draw(objects);
         window.Display();
     }
-
 
     private void Draw(Entity[] objects)
     {
         foreach (Entity obj in objects) 
         {
-            window.Draw(obj.shape);
+            if (obj.graphic is Drawable)
+                window.Draw((Drawable)obj.graphic);
         }
     }
 }

@@ -6,6 +6,8 @@ public static class Rand
 
     public static float Next(float a, float b)
     {
-        return (float)rand.Next((int)a, (int) b);
+        rand = new Random();
+
+        return rand.Next((int)a, (int) b);
     }
 }
