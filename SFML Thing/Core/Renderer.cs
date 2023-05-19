@@ -11,9 +11,9 @@ public class Renderer
     public static uint windowX = 800;
     public static uint windowY = 1200;
 
-    public void Start()
+    public void Start(RenderWindow window)
     {
-        window = new RenderWindow(new VideoMode(windowX, windowY), "PingPong");
+        this.window = window;
 
         window.Closed += new EventHandler(OnClose);
         window.Resized += new EventHandler<SizeEventArgs>(OnResize);
@@ -40,10 +40,10 @@ public class Renderer
         if (!window.IsOpen)
             return;
 
-        window.DispatchEvents();
-
         window.Clear(windowColor);
+
         Draw(objects);
+
         window.Display();
     }
 

@@ -5,10 +5,19 @@ namespace PingPong.Core;
 
 public class Input
 {
+    private Window window;
+
     public static Action<Vector2f> MovementInput;
+
+    public void Start(Window window)
+    {
+        this.window = window;
+    }
 
     public void Update()
     {
+        window.DispatchEvents();
+
         GetMovementInput();
     }
 

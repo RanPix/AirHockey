@@ -1,4 +1,6 @@
 ﻿global using Time = PingPong.Core.Time;
+using SFML.Graphics;
+using SFML.Window;
 using SFML_Thing.Core;
 using System.ComponentModel;
 
@@ -7,6 +9,8 @@ namespace PingPong.Core;
 public class Game
 {
     public static Game instance;
+
+    private RenderWindow window = new RenderWindow(new VideoMode(Renderer.windowX, Renderer.windowY), "PingPong");
 
     private Renderer renderer = new Renderer();
     private Physics physics = new Physics();
@@ -29,7 +33,8 @@ public class Game
     public void Run()
     {
         Time.Start();
-        renderer.Start();
+        renderer.Start(window);
+        input.Start(window);
         Start();
 
         while (true)
